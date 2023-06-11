@@ -1,10 +1,23 @@
 import './App.css';
+import Body from './components/Body';
+import Head from './components/Head';
 
 function App() {
   return (
     <div>
-      <h1 className='text-orange-600'>Finish off Youtube Clone this week</h1>
+      <Head />
+      <Body />
     </div>
+    /*
+      Head
+      Body
+        - Sidebar 
+            -MenuItems
+        - MainBodyContainer
+            -ButtonsList
+            -VideoContainer
+              - VideCard 
+    */
   );
 }
 
