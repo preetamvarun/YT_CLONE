@@ -3,7 +3,7 @@ import VideoContainer from './VideoContainer';
 
 const MainBodyContainer = () => {
   return (
-    <div>
+    <div style={{ flex: 8 }}>
       <ButtonsList />
       <VideoContainer />
     </div>
