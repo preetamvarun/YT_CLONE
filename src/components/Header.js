@@ -8,7 +8,7 @@ const Header = () => {
     <div className='flex flex-1 items-center justify-between shadow-lg'>
       {/* Left Side Two Logos */}
       <div className='flex items-center'>
-        <div className='mx-2'>
+        <div className='mx-2 hover:cursor-pointer'>
           <img src={ham} alt='hamburger-menu-icon' className='h-12 w-12' />
         </div>
         <div>
@@ -23,7 +23,7 @@ const Header = () => {
           placeholder='search'
           className='py-2 px-4 rounded-l-3xl border border-solid border-black w-96 outline-none'
         />
-        <div className='h-10 px-3 rounded-r-3xl bg-slate-50 border border-black'>
+        <div className='h-[42px] px-3 rounded-r-3xl bg-slate-50 border border-black'>
           <img
             src={magnifying_glass}
             alt='magnifying_glass'
