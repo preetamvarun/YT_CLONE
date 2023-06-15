@@ -1,14 +1,23 @@
 import './App.css';
 import Body from './components/Body';
+import { Provider } from 'react-redux';
 import Header from './components/Header';
+import store from './utils/store';
 
 function App() {
   return (
-    <div>
-      <Header />
-      <Body />
-    </div>
-    /*
+    <Provider store={store}>
+      <div>
+        <Header />
+        <Body />
+      </div>
+    </Provider>
+  );
+}
+
+export default App;
+
+/*
       Head
       Body
         - Sidebar 
@@ -18,7 +27,3 @@ function App() {
             -VideoContainer
               - VideCard 
     */
-  );
-}
-
-export default App;

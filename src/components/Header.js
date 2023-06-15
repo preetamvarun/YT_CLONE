@@ -2,14 +2,28 @@ import ham from './Images/hamburgermenuicon.jpg';
 import yt_logo from './Images/yt_1200.png';
 import magnifying_glass from './Images/magnifying_glass.jpg';
 import userIcon from './Images/avatar.png';
+import { useDispatch } from 'react-redux';
+import { toggleSideBarMenu } from '../utils/appSlice';
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const toggleSideBarMenuHandler = () => {
+    console.log('dispatching an action');
+    dispatch(toggleSideBarMenu());
+  };
+
   return (
     <div className='flex flex-1 items-center justify-between shadow-lg'>
       {/* Left Side Two Logos */}
       <div className='flex items-center'>
         <div className='mx-2 hover:cursor-pointer'>
-          <img src={ham} alt='hamburger-menu-icon' className='h-12 w-12' />
+          <img
+            src={ham}
+            alt='hamburger-menu-icon'
+            className='h-12 w-12'
+            onClick={toggleSideBarMenuHandler}
+          />
         </div>
         <div>
           <img src={yt_logo} alt='yt_logo' className='h-[70px] w-20' />
