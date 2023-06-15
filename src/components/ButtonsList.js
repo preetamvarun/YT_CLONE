@@ -1,7 +1,21 @@
+import ButtonComponent from './ButtonComponent';
+
 const ButtonsList = () => {
+  const btns = [
+    'All',
+    'Live',
+    'Soccer',
+    'Gaming',
+    'Comedy',
+    'Cricket',
+    'PS5',
+    'Hockey',
+  ];
   return (
     <div>
-      <h1>This is buttonslist component</h1>
+      {btns.map((btnName) => (
+        <ButtonComponent name={btnName} />
+      ))}
     </div>
   );
 };
