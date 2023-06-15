@@ -14,7 +14,7 @@ const ButtonsList = () => {
   return (
     <div>
       {btns.map((btnName) => (
-        <ButtonComponent name={btnName} />
+        <ButtonComponent name={btnName} key={btnName} />
       ))}
     </div>
   );
