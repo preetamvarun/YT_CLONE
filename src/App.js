@@ -15,7 +15,7 @@ function App() {
           <Header />
           <Routes>
             <Route path='/' Component={Body} />
-            <Route path='/watchPage' Component={WatchPage} />
+            <Route path='/watch' Component={WatchPage} />
             <Route path='*' Component={NotFound} />
           </Routes>
         </div>
