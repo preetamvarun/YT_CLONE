@@ -1,16 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ytAPI } from '../utils/constants';
 
 const VideoContainer = () => {
+  const [vidoes, setVideos] = useState([]);
+
   const getVideos = async () => {
     const data = await fetch(ytAPI);
     const json = await data.json();
-    console.log(json);
+    setVideos(json.items);
   };
 
   useEffect(() => {
     getVideos();
   }, []);
+
+  console.log(vidoes);
 
   return (
     <div>
