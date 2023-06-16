@@ -12,7 +12,7 @@ const ButtonsList = () => {
     'Hockey',
   ];
   return (
-    <div>
+    <div className='flex flex-row justify-center items-center'>
       {btns.map((btnName) => (
         <ButtonComponent name={btnName} key={btnName} />
       ))}

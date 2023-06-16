@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ytAPI } from '../utils/constants';
+import VideoCard from './VideoCard';
 
 const VideoContainer = () => {
   const [vidoes, setVideos] = useState([]);
@@ -14,11 +15,13 @@ const VideoContainer = () => {
     getVideos();
   }, []);
 
-  console.log(vidoes);
+  if (vidoes.length <= 0) return null;
 
   return (
-    <div>
-      <p>This is VideoContainer component</p>
+    <div className='flex flex-wrap items-center justify-center'>
+      {vidoes.map((video) => (
+        <VideoCard video={video} key={video.snippet.thumbnails.medium.url} />
+      ))}
     </div>
   );
 };
