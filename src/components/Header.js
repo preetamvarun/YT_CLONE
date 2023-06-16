@@ -4,12 +4,12 @@ import magnifying_glass from './Images/magnifying_glass.jpg';
 import userIcon from './Images/avatar.png';
 import { useDispatch } from 'react-redux';
 import { toggleSideBarMenu } from '../utils/appSlice';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const dispatch = useDispatch();
 
   const toggleSideBarMenuHandler = () => {
-    console.log('dispatching an action');
     dispatch(toggleSideBarMenu());
   };
 
@@ -26,7 +26,9 @@ const Header = () => {
           />
         </div>
         <div>
-          <img src={yt_logo} alt='yt_logo' className='h-[70px] w-20' />
+          <Link to={'/'}>
+            <img src={yt_logo} alt='yt_logo' className='h-[70px] w-20' />
+          </Link>
         </div>
       </div>
 
