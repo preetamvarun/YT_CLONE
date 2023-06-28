@@ -33,7 +33,7 @@ const Header = () => {
   }, [inputSearch]);
 
   const callSearchAPI = async () => {
-    console.log('API CALL ' + inputSearch);
+    // console.log('API CALL ' + inputSearch);
 
     const data = await fetch(ytSearchAPI + inputSearch);
     const json = await data.json();
