@@ -1,18 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const cacheSlice = createSlice({
-  name: 'cacheSlice',
-  initialState: {
-    cacheObj: {},
-  },
+  name: 'cache',
+  initialState: {},
   reducers: {
     manageCache: (state, action) => {
       /*
-            action : {
+            action.payload will be -> {
                 ip : [1,2,3,4,5,6]
             }
         */
-      state.cacheObj = { ...action.payload, ...state.cacheObj };
+
+      state = Object.assign(state, action.payload);
     },
   },
 });

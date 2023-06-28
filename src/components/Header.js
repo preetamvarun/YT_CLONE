@@ -7,21 +7,24 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ytSearchAPI } from '../utils/constants';
 import { useSelector } from 'react-redux';
+import { manageCache } from '../utils/cacheSlice';
 
 const Header = () => {
   const [inputSearch, setinputSearch] = useState('');
 
   const [searchSuggestions, setSearchSuggestions] = useState([]);
 
-  const cacheSlice = useSelector((store) => store.cacheSlice);
-
-  console.log(cacheSlice);
+  const cacheSlice = useSelector((store) => store.cache);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      callSearchAPI();
+      if (cacheSlice[inputSearch]) {
+        setSearchSuggestions(cacheSlice[inputSearch]);
+      } else {
+        callSearchAPI();
+      }
     }, 200);
 
     return () => {
@@ -30,9 +33,16 @@ const Header = () => {
   }, [inputSearch]);
 
   const callSearchAPI = async () => {
+    console.log('API CALL ' + inputSearch);
+
     const data = await fetch(ytSearchAPI + inputSearch);
     const json = await data.json();
     setSearchSuggestions(json[1]);
+    dispatch(
+      manageCache({
+        [inputSearch]: json[1],
+      })
+    );
   };
 
   const toggleSideBarMenuHandler = () => {
@@ -77,7 +87,9 @@ const Header = () => {
           <div className='absolute bg-white top-full right-12 left-0 shadow-xl p-2 mt-3 rounded-md'>
             <ul className='list-none'>
               {searchSuggestions.map((s) => (
-                <div className='flex items-center ml-2 my-1 p-1 hover:bg-gray-200 hover:cursor-default'>
+                <div
+                  className='flex items-center ml-2 my-1 p-1 hover:bg-gray-200 hover:cursor-default'
+                  key={s}>
                   <i className='fa-solid fa-magnifying-glass mr-4'></i>
                   <li key={s} className='mb-1'>
                     {s}

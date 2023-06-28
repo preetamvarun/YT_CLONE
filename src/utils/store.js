@@ -5,7 +5,7 @@ import cacheSlice from './cacheSlice';
 const store = configureStore({
   reducer: {
     app: appSlice,
-    cacheSlice: cacheSlice,
+    cache: cacheSlice,
   },
 });
 
