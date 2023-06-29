@@ -17,8 +17,6 @@ const Header = () => {
 
   const cacheSlice = useSelector((store) => store.cache);
 
-  const searchResultsSlice = useSelector((store) => store.searchResultsSlice);
-
   const dispatch = useDispatch();
 
   const [suggestionClick, setSuggestionClick] = useState(false);
@@ -32,7 +30,6 @@ const Header = () => {
     const json = await data.json();
     // console.log(json);
     dispatch(inputJSONData(json));
-    console.log(searchResultsSlice.searchJSONData);
   };
 
   /* Implementing De-Bouncing */
