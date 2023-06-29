@@ -3,11 +3,12 @@ import { closeSideBarMenu } from '../utils/appSlice';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { SuggestedVideoCard } from './SuggestedVideoCard';
 
 const WatchPage = () => {
   const searchResultsSlice = useSelector((store) => store.searchResultsSlice);
 
-  console.log(searchResultsSlice);
+  const searchResults = searchResultsSlice.searchJSONData.items;
 
   const [params] = useSearchParams();
 
@@ -22,9 +23,9 @@ const WatchPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className='flex'>
       <iframe
-        className='m-3'
+        className='m-3 flex-2'
         width='700'
         height='400'
         src={`https://www.youtube.com/embed/${params.get('v')}`}
@@ -32,6 +33,12 @@ const WatchPage = () => {
         frameBorder='0'
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
         allowFullScreen></iframe>
+
+      <div className='flex-1'>
+        {searchResults.map((eachResult) => (
+          <SuggestedVideoCard eachResult={eachResult} showDescription={false} />
+        ))}
+      </div>
     </div>
   );
 };

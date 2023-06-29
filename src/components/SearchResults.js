@@ -6,12 +6,10 @@ const SearchResults = () => {
 
   const searchResults = searchResultsSlice.searchJSONData.items;
 
-  if (!searchResults) return null;
-
   return (
     <div className='mt-5'>
       {searchResults.map((eachResult) => (
-        <SuggestedVideoCard eachResult={eachResult} />
+        <SuggestedVideoCard eachResult={eachResult} showDescription={true} />
       ))}
     </div>
   );
