@@ -1,5 +1,3 @@
-const SearchResults = () => {
-  return <div>SearchResults</div>;
-};
+const SearchResults = () => {};
 
 export default SearchResults;

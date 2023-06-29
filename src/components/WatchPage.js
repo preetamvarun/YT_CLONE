@@ -6,8 +6,6 @@ import { useSearchParams } from 'react-router-dom';
 const WatchPage = () => {
   const [params] = useSearchParams();
 
-  console.log(params.get('v'));
-
   const disptach = useDispatch();
 
   const close = () => {
@@ -28,7 +26,7 @@ const WatchPage = () => {
         title='YouTube video player'
         frameBorder='0'
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-        allowfullscreen></iframe>
+        allowFullScreen></iframe>
     </div>
   );
 };

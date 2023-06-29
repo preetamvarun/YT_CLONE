@@ -6,6 +6,7 @@ import store from './utils/store';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import WatchPage from './components/WatchPage';
 import NotFound from './components/NotFound';
+import SearchResults from './components/SearchResults';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path='/' Component={Body} />
             <Route path='/watch' Component={WatchPage} />
             <Route path='*' Component={NotFound} />
+            <Route path='/results' Component={SearchResults} />
           </Routes>
         </div>
       </Provider>

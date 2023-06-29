@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { ytSearchAPI, ytQuerySearchAPI } from '../utils/constants';
 import { useSelector } from 'react-redux';
 import { manageCache } from '../utils/cacheSlice';
+import { inputJSONData } from '../utils/searchResultsSlice';
 
 const Header = () => {
   const [inputSearch, setinputSearch] = useState('');
@@ -15,6 +16,8 @@ const Header = () => {
   const [searchSuggestions, setSearchSuggestions] = useState([]);
 
   const cacheSlice = useSelector((store) => store.cache);
+
+  const searchResultsSlice = useSelector((store) => store.searchResultsSlice);
 
   const dispatch = useDispatch();
 
@@ -27,7 +30,9 @@ const Header = () => {
         '&key=AIzaSyCn76zXUdXLcqy4Ik1QwISRFLK307QsbRI'
     );
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
+    dispatch(inputJSONData(json));
+    console.log(searchResultsSlice.searchJSONData);
   };
 
   /* Implementing De-Bouncing */
@@ -95,11 +100,13 @@ const Header = () => {
             setSuggestionClick(false);
           }}
         />
-        <div
-          className='h-[42px] px-3 rounded-r-3xl bg-slate-50 border border-black'
-          onClick={HandleSearchOnClick}>
-          <i className='fa-solid fa-magnifying-glass relative top-2'></i>
-        </div>
+        <Link to='/results'>
+          <div
+            className='h-[42px] px-3 rounded-r-3xl bg-slate-50 border border-black'
+            onClick={HandleSearchOnClick}>
+            <i className='fa-solid fa-magnifying-glass relative top-2'></i>
+          </div>
+        </Link>
 
         {!suggestionClick && (
           <div className='absolute bg-white top-full right-12 left-0 shadow-xl mt-3 rounded-md'>
