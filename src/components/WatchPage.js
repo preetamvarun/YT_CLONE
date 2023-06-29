@@ -2,8 +2,13 @@ import { useEffect } from 'react';
 import { closeSideBarMenu } from '../utils/appSlice';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const WatchPage = () => {
+  const searchResultsSlice = useSelector((store) => store.searchResultsSlice);
+
+  console.log(searchResultsSlice);
+
   const [params] = useSearchParams();
 
   const disptach = useDispatch();
