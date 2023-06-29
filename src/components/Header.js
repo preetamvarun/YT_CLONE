@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { toggleSideBarMenu } from '../utils/appSlice';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { ytSearchAPI } from '../utils/constants';
+import { ytSearchAPI, ytQuerySearchAPI } from '../utils/constants';
 import { useSelector } from 'react-redux';
 import { manageCache } from '../utils/cacheSlice';
 
@@ -18,8 +18,23 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
+  const [suggestionClick, setSuggestionClick] = useState(false);
+
+  const HandleSearchOnClick = async () => {
+    const data = await fetch(
+      ytQuerySearchAPI +
+        inputSearch +
+        '&key=AIzaSyCn76zXUdXLcqy4Ik1QwISRFLK307QsbRI'
+    );
+    const json = await data.json();
+    console.log(json);
+  };
+
+  /* Implementing De-Bouncing */
   useEffect(() => {
     const timer = setTimeout(() => {
+      /* If the query is already in the cache there is no need to make an api call */
+
       if (cacheSlice[inputSearch]) {
         setSearchSuggestions(cacheSlice[inputSearch]);
       } else {
@@ -77,19 +92,26 @@ const Header = () => {
           value={inputSearch}
           onChange={(e) => {
             setinputSearch(e.target.value);
+            setSuggestionClick(false);
           }}
         />
-        <div className='h-[42px] px-3 rounded-r-3xl bg-slate-50 border border-black'>
+        <div
+          className='h-[42px] px-3 rounded-r-3xl bg-slate-50 border border-black'
+          onClick={HandleSearchOnClick}>
           <i className='fa-solid fa-magnifying-glass relative top-2'></i>
         </div>
 
-        {inputSearch.length > 0 && (
-          <div className='absolute bg-white top-full right-12 left-0 shadow-xl p-2 mt-3 rounded-md'>
+        {!suggestionClick && (
+          <div className='absolute bg-white top-full right-12 left-0 shadow-xl mt-3 rounded-md'>
             <ul className='list-none'>
               {searchSuggestions.map((s) => (
                 <div
                   className='flex items-center ml-2 my-1 p-1 hover:bg-gray-200 hover:cursor-default'
-                  key={s}>
+                  key={s}
+                  onClick={() => {
+                    setSuggestionClick(true);
+                    setinputSearch(s);
+                  }}>
                   <i className='fa-solid fa-magnifying-glass mr-4'></i>
                   <li key={s} className='mb-1'>
                     {s}
