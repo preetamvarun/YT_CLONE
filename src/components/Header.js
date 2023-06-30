@@ -1,6 +1,5 @@
-import ham from './Images/hamburgermenuicon.jpg';
-import yt_logo from './Images/yt_1200.png';
-import userIcon from './Images/avatar.png';
+import yt_logo from './Images/yt_1201.png';
+import userIcon from './Images/avatar-2.png';
 import { useDispatch } from 'react-redux';
 import { toggleSideBarMenu } from '../utils/appSlice';
 import { Link } from 'react-router-dom';
@@ -75,16 +74,13 @@ const Header = () => {
       {/* Left Side Two Logos */}
       <div className='flex items-center'>
         <div className='mx-2 hover:cursor-pointer'>
-          <img
-            src={ham}
-            alt='hamburger-menu-icon'
-            className='h-12 w-12'
-            onClick={toggleSideBarMenuHandler}
-          />
+          <i
+            className='fa-solid fa-bars text-[22px] ml-4 mt-1'
+            onClick={toggleSideBarMenuHandler}></i>
         </div>
-        <div>
+        <div className='ml-2'>
           <Link to={'/'}>
-            <img src={yt_logo} alt='yt_logo' className='h-[70px] w-20' />
+            <img src={yt_logo} alt='yt_logo' className='h-[65px] w-20' />
           </Link>
         </div>
       </div>
@@ -133,7 +129,7 @@ const Header = () => {
 
       {/*Profile Pic Field*/}
       <div className='mr-4'>
-        <img src={userIcon} alt='userIcon' className='h-10' />
+        <img src={userIcon} alt='userIcon' className='h-10 mr-4' />
       </div>
     </div>
   );

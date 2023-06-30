@@ -36,7 +36,7 @@ const WatchPage = () => {
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
         allowFullScreen></iframe>
 
-      <div className='flex-1'>
+      <div className='flex-1 mt-2'>
         {searchResults.map((eachResult) => (
           <SuggestedVideoCard
             eachResult={eachResult}

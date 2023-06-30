@@ -1,14 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ytQuerySearchAPI } from '../utils/constants';
+import { useDispatch } from 'react-redux';
+import { inputJSONData } from '../utils/searchResultsSlice';
 
 const VideoCard = ({ video }) => {
+  const dispatch = useDispatch();
+
   const { snippet, statistics } = video;
 
   const { thumbnails } = snippet;
 
+  const getVideoRecommendations = async () => {
+    const data = await fetch(
+      ytQuerySearchAPI +
+        snippet.channelTitle +
+        '&key=AIzaSyCn76zXUdXLcqy4Ik1QwISRFLK307QsbRI'
+    );
+    const json = await data.json();
+    dispatch(inputJSONData(json));
+  };
+
   return (
     <Link to={'/watch?v=' + video.id}>
-      <div className='m-2 w-[20rem] shadow-lg h-[21rem] rounded-md text-sm overflow-y-hidden'>
+      <div
+        className='m-2 w-[20rem] shadow-lg h-[21rem] rounded-md text-sm overflow-y-hidden'
+        onClick={getVideoRecommendations}>
         <img
           src={thumbnails.medium.url}
           alt='video-thumbnail'
