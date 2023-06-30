@@ -5,7 +5,7 @@ export const ytAPI =
   API_KEY;
 
 export const ytSearchAPI =
-  'http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=';
+  'https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=';
 
 export const ytQuerySearchAPI =
   'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=';
