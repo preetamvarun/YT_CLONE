@@ -22,6 +22,8 @@ const WatchPage = () => {
     close();
   }, []);
 
+  if (!searchResults) return null;
+
   return (
     <div className='flex'>
       <iframe
@@ -36,7 +38,11 @@ const WatchPage = () => {
 
       <div className='flex-1'>
         {searchResults.map((eachResult) => (
-          <SuggestedVideoCard eachResult={eachResult} showDescription={false} />
+          <SuggestedVideoCard
+            eachResult={eachResult}
+            showDescription={false}
+            key={eachResult.id.videoId}
+          />
         ))}
       </div>
     </div>

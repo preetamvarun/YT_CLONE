@@ -18,7 +18,7 @@ const VideoContainer = () => {
   if (vidoes.length <= 0) return null;
 
   return (
-    <div className='flex flex-wrap items-center justify-center'>
+    <div className='shadow-md flex flex-wrap justify-center items-center'>
       {vidoes.map((video) => (
         <VideoCard video={video} key={video.snippet.thumbnails.medium.url} />
       ))}
