@@ -67,7 +67,11 @@ const Header = () => {
   };
 
   return (
-    <div className='flex flex-1 items-center justify-between shadow-lg'>
+    <div
+      className='flex flex-1 items-center justify-between shadow-lg'
+      onClick={() => {
+        setSuggestionClick(true);
+      }}>
       {/* Left Side Two Logos */}
       <div className='flex items-center'>
         <div className='mx-2 hover:cursor-pointer'>
