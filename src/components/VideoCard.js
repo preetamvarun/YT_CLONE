@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { inputJSONData } from '../utils/searchResultsSlice';
 
 const VideoCard = ({ video }) => {
+
   const dispatch = useDispatch();
 
   const { snippet, statistics } = video;
@@ -23,6 +24,11 @@ const VideoCard = ({ video }) => {
 
   return (
     <Link to={'/watch?v=' + video.id}>
+    
+      {/* pass in the correct video id in the url so that you can read the video id from that url
+      in the watch page which enables you to play that video */}
+
+      {/* This div is the each video card */}
       <div
         className='m-2 w-[20rem] shadow-lg h-[21rem] rounded-md text-sm overflow-y-hidden'
         onClick={getVideoRecommendations}>

@@ -4,12 +4,14 @@ import { useDispatch } from 'react-redux';
 import { toggleSideBarMenu } from '../utils/appSlice';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { ytSearchAPI, ytQuerySearchAPI } from '../utils/constants';
+import { ytQuerySearchAPI, ytSearchAPI } from '../utils/constants';
 import { useSelector } from 'react-redux';
 import { manageCache } from '../utils/cacheSlice';
 import { inputJSONData } from '../utils/searchResultsSlice';
 
 const Header = () => {
+
+  /* inputSearch variable contains the text which is typed by the user */
   const [inputSearch, setinputSearch] = useState('');
 
   const [searchSuggestions, setSearchSuggestions] = useState([]);
@@ -34,24 +36,36 @@ const Header = () => {
   /* Implementing De-Bouncing */
   useEffect(() => {
     const timer = setTimeout(() => {
-      /* If the query is already in the cache there is no need to make an api call */
-
+      /* If the query is already in the cache there is no need to make an api call.
+      For example If user typed India then you will make an api call and you will get some 
+      suggestion results. Then user typed n, now the input string becomes Indian. Again you will
+      generate suggestion results from Indian. Now, If user typed backspace you will get India.
+      Now there is no need to make an api call again if you cached the suggestion results of India
+      when you first encountered it. So, keep these suggestion results in the redux store */
       if (cacheSlice[inputSearch]) {
         setSearchSuggestions(cacheSlice[inputSearch]);
-      } else {
+      } 
+      
+      /* If the suggestions are not there in the cacheSlice and the event delay is > 200ms then
+      make an api call and store the inputSearch text and suggestion results of that particular inputSearch Text*/
+      else {
         callSearchAPI();
       }
+      /* If the difference b/w two key press events don't make an api call */
     }, 200);
 
     return () => {
       clearTimeout(timer);
     };
+
+    // run the useEffect every time when user types something in the search bar
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputSearch]);
 
+  
+// function to make api call on the inputSearch text 
   const callSearchAPI = async () => {
-    // console.log('API CALL ' + inputSearch);
-
     const data = await fetch(ytSearchAPI + inputSearch);
     const json = await data.json();
     setSearchSuggestions(json[1]);
@@ -63,6 +77,7 @@ const Header = () => {
   };
 
   const toggleSideBarMenuHandler = () => {
+    /* disptach an action toggle side bar menu so that the state in the redux store get's updated*/
     dispatch(toggleSideBarMenu());
   };
 
@@ -72,13 +87,24 @@ const Header = () => {
       onClick={() => {
         setSuggestionClick(true);
       }}>
+      {/* The suggestion box inside the search bar needs to close when user clicks other parts of 
+      header apart from search bar*/}
+
+
+      
       {/* Left Side Two Logos */}
       <div className='flex items-center'>
+
+      {/* This is the hamburger logo. When you click on it redux store get's updated */}
         <div className='mx-2 hover:cursor-pointer'>
           <i
             className='fa-solid fa-bars text-[22px] ml-4 mt-1'
+            /* when you click on the hamburger menu*/
             onClick={toggleSideBarMenuHandler}></i>
         </div>
+
+
+        {/* When you click on the youtube logo you will re-directed to the same page */}
         <div className='ml-2'>
           <Link to={'/'}>
             <img src={yt_logo} alt='yt_logo' className='h-[65px] w-20' />
@@ -98,6 +124,9 @@ const Header = () => {
             setSuggestionClick(false);
           }}
         />
+        {/* when user is typing in the input field the suggestions box needs to be shown below the
+        search bar*/}
+
         <Link to='/results'>
           <div
             className='h-[42px] px-3 rounded-r-3xl bg-slate-50 border border-black'
@@ -106,6 +135,7 @@ const Header = () => {
           </div>
         </Link>
 
+        {/* SHOWING THE SUGGESTION BOX */}
         {!suggestionClick && (
           <div className='absolute bg-white top-full right-12 left-0 shadow-xl mt-3 rounded-md'>
             <ul className='list-none'>
@@ -114,7 +144,9 @@ const Header = () => {
                   className='flex items-center ml-2 my-1 p-1 hover:bg-gray-200 hover:cursor-default'
                   key={s}
                   onClick={() => {
+                    /* The suggestion box needs to clone when user clicks on any one of the suggestions*/
                     setSuggestionClick(true);
+                    /* The suggestion should be there in the input field */
                     setinputSearch(s);
                   }}>
                   <i className='fa-solid fa-magnifying-glass mr-4'></i>
@@ -137,3 +169,9 @@ const Header = () => {
 };
 
 export default Header;
+
+
+/*
+When you type in the search bar you will be making api calls. But you will not make api calls for 
+each and every key press. Using debouncing technique with a delay of 200ms.
+*/

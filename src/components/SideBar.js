@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux';
 
 const SideBar = () => {
+
+  /* subscribe to specific part of a store. Don't subscribe to the entire store which is not optimal */
   const isSideBarOpen = useSelector((store) => store.app.isMenuOpen);
 
-  // Early return pattern
+  // Early return pattern. 
   if (!isSideBarOpen) return null;
 
   return (

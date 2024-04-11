@@ -5,6 +5,7 @@ import searchResultsSlice from './searchResultsSlice';
 
 const store = configureStore({
   reducer: {
+    /* put the slice of hamburger menu in the store */
     app: appSlice,
     cache: cacheSlice,
     searchResultsSlice: searchResultsSlice,
