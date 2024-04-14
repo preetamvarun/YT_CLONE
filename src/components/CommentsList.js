@@ -3,7 +3,6 @@
 import Comment from "./Comment";
 
 /* I am collecting all the comments data here */
-
 const CommentsList = ({comments}) => {
     return (
         comments.map((comment) => (
@@ -17,7 +16,6 @@ const CommentsList = ({comments}) => {
                     <CommentsList comments = {comment.replies}/>
                 </div>
             </div>
-           
         ))
     )
 }
